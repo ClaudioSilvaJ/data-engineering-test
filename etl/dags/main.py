@@ -3,8 +3,8 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime
 from extract import extract_task
 from verify import verify_main_data
-from transform import process_data
-from load_data import insert_data_to_sqlite
+from transform import transform_data
+from load_data import insert_data_to_postgres
 
 # Airflow variables
 # Username:  airflow
@@ -44,7 +44,7 @@ extract = PythonOperator(
 
 transform = PythonOperator(
     task_id='transform_data',
-    python_callable=process_data,
+    python_callable=transform_data,
     provide_context=True,
     op_args=[MAIN_CACHE_FILE, DIESEL_CACHE_FILE, OUTPUT_FILE],
     dag=dag
@@ -60,7 +60,7 @@ verify = PythonOperator(
 
 loading = PythonOperator(
     task_id='load_data',
-    python_callable=insert_data_to_sqlite,
+    python_callable=insert_data_to_postgres,
     provide_context=True,
     op_args=[OUTPUT_FILE, DB_URL],
     dag=dag

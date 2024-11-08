@@ -2,7 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import os
 
-def insert_data_to_sqlite(csv_file: str, db_url: str, **kwargs):
+def insert_data_to_postgres(csv_file: str, db_url: str, **kwargs):
     try:
         if os.path.exists(csv_file):
             df = pd.read_csv(csv_file)

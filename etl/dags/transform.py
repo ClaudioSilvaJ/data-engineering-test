@@ -7,7 +7,7 @@ MESES_MAP = {
         'Set': 'Sep', 'Out': 'Oct', 'Nov': 'Nov', 'Dez': 'Dec'
     }
 
-def process_data(file_path, diesel_path, output_path, **kwargs):
+def transform_data(file_path, diesel_path, output_path, **kwargs):
     if(os.path.exists(file_path)):
         df_cons = pd.read_csv(file_path)
         df_diesel = pd.read_csv(diesel_path)
